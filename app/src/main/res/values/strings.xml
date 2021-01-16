@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Prueba Anchor Books</string>
+    <string name="book_cover">Portada</string>
+    <string name="country">Pais: %s</string>
+    <string name="author">Autor: %s</string>
+    <string name="language">Idioma: %s</string>
 </resources>
