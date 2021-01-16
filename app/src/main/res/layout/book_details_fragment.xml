@@ -157,4 +157,18 @@
         android:background="@color/accent"
         />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/det_deli"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textColor="@color/primary_text"
+        android:background="@color/primary"
+        android:text="@string/buy"
+        app:cornerRadius="25dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

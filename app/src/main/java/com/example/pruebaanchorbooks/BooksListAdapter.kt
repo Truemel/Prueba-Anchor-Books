@@ -1,5 +1,6 @@
 package com.example.pruebaanchorbooks
 
+import android.content.Context
 import android.content.res.Resources.getSystem
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pruebaanchorbooks.model.room.RoomBook
 import com.squareup.picasso.Picasso
 
-class BooksListAdapter(var list:MutableList<RoomBook>) :RecyclerView.Adapter<BooksListAdapter.Holder>(){
+class BooksListAdapter(var list:MutableList<RoomBook>, var context:Context) :RecyclerView.Adapter<BooksListAdapter.Holder>(),
+    View.OnClickListener {
 
 
     fun update(list:MutableList<RoomBook>){
@@ -35,11 +37,13 @@ class BooksListAdapter(var list:MutableList<RoomBook>) :RecyclerView.Adapter<Boo
         holder.autor = view.findViewById(R.id.book_author)
         holder.country = view.findViewById(R.id.book_country)
         holder.lang = view.findViewById(R.id.book_language)
+        view.setOnClickListener(this)
 
         return holder
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        holder.itemView.tag = list.get(position).id
         holder.title.text = list.get(position).title
         holder.autor.text = getSystem().getString(R.string.author, list.get(position).author)
         holder.country.text = getSystem().getString(R.string.country, list.get(position).country)
@@ -49,5 +53,9 @@ class BooksListAdapter(var list:MutableList<RoomBook>) :RecyclerView.Adapter<Boo
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    override fun onClick(v: View?) {
+        (context as MainActivity).changeFragment(BookDetailsFragment(v!!.tag as Int))
     }
 }

@@ -11,4 +11,5 @@
     <string name="deliv">Despacho:</string>
     <string name="del_ima">Estado</string>
     <string name="link">Enlace: %s</string>
+    <string name="buy">Comprar</string>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -17,7 +18,7 @@ import com.example.pruebaanchorbooks.model.room.RoomBookDetails
 import com.example.pruebaanchorbooks.viewmodel.BooksViewModel
 import com.squareup.picasso.Picasso
 
-class BookDetailsFragment(id:Int): Fragment() {
+class BookDetailsFragment(var bookId:Int): Fragment(), View.OnClickListener {
 
     private lateinit var vModel:BooksViewModel
     private lateinit var image:ImageView
@@ -32,6 +33,7 @@ class BookDetailsFragment(id:Int): Fragment() {
     private lateinit var deliv:ImageView
     private lateinit var link:TextView
     private lateinit var detail:RoomBookDetails
+    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +57,9 @@ class BookDetailsFragment(id:Int): Fragment() {
         pages = view.findViewById(R.id.det_pages)
         deliv = view.findViewById(R.id.det_delivery)
         link = view.findViewById(R.id.det_link)
-        vModel.getDetails(id)
+        button = view.findViewById(R.id.button)
+        button.setOnClickListener(this);
+        vModel.getDetails(bookId)
 
         vModel.bookDetails.observe(context as MainActivity, Observer { if(it != null && !it.title.isNullOrEmpty()){
             title.text = it.title
@@ -94,5 +98,9 @@ class BookDetailsFragment(id:Int): Fragment() {
         }
 
         startActivity(inten)
+    }
+
+    override fun onClick(v: View?) {
+        sendEmail()
     }
 }
