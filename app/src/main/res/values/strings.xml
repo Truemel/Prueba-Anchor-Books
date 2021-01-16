@@ -4,4 +4,11 @@
     <string name="country">Pais: %s</string>
     <string name="author">Autor: %s</string>
     <string name="language">Idioma: %s</string>
+    <string name="price">Precio: %d</string>
+    <string name="last">Ultimo Precio: %d</string>
+    <string name="year">Año: %d</string>
+    <string name="pages">Paginas: %d</string>
+    <string name="deliv">Despacho:</string>
+    <string name="del_ima">Estado</string>
+    <string name="link">Enlace: %s</string>
 </resources>
