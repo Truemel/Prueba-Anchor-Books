@@ -1,7 +1,6 @@
 package com.example.pruebaanchorbooks
 
 import android.content.Context
-import android.content.res.Resources.getSystem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pruebaanchorbooks.model.room.RoomBook
 import com.squareup.picasso.Picasso
 
-class BooksListAdapter(var list:MutableList<RoomBook>, var context:Context) :RecyclerView.Adapter<BooksListAdapter.Holder>(),
+class BooksListAdapter(var list:MutableList<RoomBook>, private var context:Context) :RecyclerView.Adapter<BooksListAdapter.Holder>(),
     View.OnClickListener {
 
 
@@ -43,12 +42,12 @@ class BooksListAdapter(var list:MutableList<RoomBook>, var context:Context) :Rec
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.itemView.tag = list.get(position).id
-        holder.title.text = list.get(position).title
-        holder.autor.text = getSystem().getString(R.string.author, list.get(position).author)
-        holder.country.text = getSystem().getString(R.string.country, list.get(position).country)
-        holder.lang.text = getSystem().getString(R.string.language, list.get(position).language)
-        Picasso.get().load(list.get(position).imageLink).into(holder.image)
+        holder.itemView.tag = list[position].id
+        holder.title.text = list[position].title
+        holder.autor.text = context.getResources().getString(R.string.author, list[position].author)
+        holder.country.text = context.getResources().getString(R.string.country, list[position].country)
+        holder.lang.text = context.getResources().getString(R.string.language, list[position].language)
+        Picasso.get().load(list[position].imageLink).into(holder.image)
     }
 
     override fun getItemCount(): Int {

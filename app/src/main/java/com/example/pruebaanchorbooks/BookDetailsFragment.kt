@@ -1,7 +1,6 @@
 package com.example.pruebaanchorbooks
 
 import android.content.Intent
-import android.content.res.Resources.getSystem
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,7 +17,7 @@ import com.example.pruebaanchorbooks.model.room.RoomBookDetails
 import com.example.pruebaanchorbooks.viewmodel.BooksViewModel
 import com.squareup.picasso.Picasso
 
-class BookDetailsFragment(var bookId:Int): Fragment(), View.OnClickListener {
+class BookDetailsFragment(private var bookId:Int): Fragment(), View.OnClickListener {
 
     private lateinit var vModel:BooksViewModel
     private lateinit var image:ImageView
@@ -58,20 +57,20 @@ class BookDetailsFragment(var bookId:Int): Fragment(), View.OnClickListener {
         deliv = view.findViewById(R.id.det_delivery)
         link = view.findViewById(R.id.det_link)
         button = view.findViewById(R.id.button)
-        button.setOnClickListener(this);
+        button.setOnClickListener(this)
         vModel.getDetails(bookId)
 
-        vModel.bookDetails.observe(context as MainActivity, Observer { if(it != null && !it.title.isNullOrEmpty()){
+        vModel.bookDetails.observe(context as MainActivity, Observer { if(it != null && !it.title.isEmpty()){
             title.text = it.title
-            autor.text = getSystem().getString(R.string.author, it.author)
-            country.text = getSystem().getString(R.string.country, it.country)
-            lang.text = getSystem().getString(R.string.language, it.language)
+            autor.text = context?.resources?.getString(R.string.author, it.author)
+            country.text = context?.resources?.getString(R.string.country, it.country)
+            lang.text = context?.getString(R.string.language, it.language)
             Picasso.get().load(it.imageLink).into(image)
-            link.text = getSystem().getString(R.string.link, it.link)
-            year.text = getSystem().getString(R.string.year, it.year)
-            pages.text = getSystem().getString(R.string.pages, it.pages)
-            price.text = getSystem().getString(R.string.price, it.price)
-            last.text = getSystem().getString(R.string.last, it.lastPrice)
+            link.text = context?.getString(R.string.link, it.link)
+            year.text = context?.getString(R.string.year, it.year)
+            pages.text = context?.getString(R.string.pages, it.pages)
+            price.text = context?.getString(R.string.price, it.price)
+            last.text = context?.getString(R.string.last, it.lastPrice)
             if(it.delivery)
                 deliv.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ok_mark, context?.theme))
             else
@@ -84,7 +83,7 @@ class BookDetailsFragment(var bookId:Int): Fragment(), View.OnClickListener {
     }
 
     //Envia Email
-    fun sendEmail(){
+    private fun sendEmail(){
         val inten: Intent = Intent(Intent.ACTION_SEND).apply {
             setData(Uri.parse("mailto:"))
             setType("text/plain")

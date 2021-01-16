@@ -20,7 +20,7 @@ class BooksListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vModel =ViewModelProvider(this).get(BooksViewModel::class.java)
-        adapter = BooksListAdapter(mutableListOf())
+        adapter = BooksListAdapter(mutableListOf(), context as MainActivity)
         vModel.booksList.observe(this, Observer { adapter.update(it) })
     }
 

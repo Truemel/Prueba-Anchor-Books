@@ -8,7 +8,7 @@ class RoomDBManager(val dao: RoomDAO) {
 
     //request para insertar la lista de libros a la base de datos
     suspend fun insertBooksList(list: MutableList<RetroBook>){
-        var bookList:MutableList<RoomBook> = mutableListOf()
+        val bookList:MutableList<RoomBook> = mutableListOf()
         for (book in list)
             bookList.add(RoomBook(book.id, book.author, book.country, book.imageLink, book.language, book.title))
         dao.insertBooksList(bookList)
