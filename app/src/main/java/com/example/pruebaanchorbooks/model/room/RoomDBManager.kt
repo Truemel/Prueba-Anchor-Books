@@ -30,12 +30,12 @@ class RoomDBManager(val dao: RoomDAO) {
     }
 
     //request para obtener la lista de libros de la base de datos
-    fun getProductsList(): LiveData<MutableList<RoomBook>> {
+    fun getBooksList(): LiveData<MutableList<RoomBook>> {
         return dao.getBooksList()
     }
 
     //request para obtener los detalles de un libro de la base de datos
-    fun getDetail(id:Int): LiveData<RoomBookDetails> {
+    fun getBookDetails(id:Int): LiveData<RoomBookDetails> {
         return dao.getBookDetails(id)
     }
 }

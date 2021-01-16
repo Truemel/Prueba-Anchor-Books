@@ -6,18 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [RoomBook::class, RoomBookDetails::class], version = 1, exportSchema = false)
-abstract class ExamenRoomDataBase:RoomDatabase() {
+abstract class BooksRoomDataBase:RoomDatabase() {
 
     abstract fun getDAO():RoomDAO
 
     companion object{
         private const val DB_NAME = "anchor_books_db"
-        private var db:ExamenRoomDataBase? = null
+        private var db:BooksRoomDataBase? = null
 
-        fun getDB(context: Context):ExamenRoomDataBase{
+        fun getDB(context: Context):BooksRoomDataBase{
             if(db == null)
                 synchronized(this){
-                    db = Room.databaseBuilder(context, ExamenRoomDataBase::class.java, DB_NAME).build()
+                    db = Room.databaseBuilder(context, BooksRoomDataBase::class.java, DB_NAME).build()
                 }
             return db!!
         }
